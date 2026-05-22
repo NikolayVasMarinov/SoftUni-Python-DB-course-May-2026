@@ -1,0 +1,45 @@
+# ========================
+# PyCharm
+# ========================
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# ========================
+# Python
+# ========================
+__pycache__/
+*.py[cod]
+*.pyo
+.env
+.venv/
+venv/
+env/
+*.egg-info/
+dist/
+build/
+
+# ========================
+# Database / Sensitive
+# ========================
+*.sqlite3
+*.db
+.env
+secrets.py
+config.py
+database.ini
+
+# ========================
+# OS
+# ========================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ========================
+# Logs & temp files
+# ========================
+*.log
+*.tmp
+*.bak
