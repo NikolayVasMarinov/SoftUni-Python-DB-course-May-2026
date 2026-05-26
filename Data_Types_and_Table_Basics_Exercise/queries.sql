@@ -13,3 +13,11 @@ ALTER TABLE minions_info
 ADD COLUMN code CHAR(4),
 ADD COLUMN task TEXT,
 ADD COLUMN salary NUMERIC(8,3);
+
+ALTER TABLE minions_info
+RENAME COLUMN salary TO banana;
+
+ALTER TABLE minions_info
+ADD COLUMN email VARCHAR(20),
+ADD COLUMN equipped BOOLEAN NOT NULL;
+
