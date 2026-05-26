@@ -1,0 +1,15 @@
+CREATE DATABASE minions_db;
+
+CREATE TABLE minions(
+    id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    name VARCHAR(30),
+    age SMALLINT
+);
+
+ALTER TABLE minions
+RENAME TO minions_info;
+
+ALTER TABLE minions_info
+ADD COLUMN code CHAR(4),
+ADD COLUMN task TEXT,
+ADD COLUMN salary NUMERIC(8,3);
