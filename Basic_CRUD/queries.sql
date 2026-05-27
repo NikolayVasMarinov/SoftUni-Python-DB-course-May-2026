@@ -1,3 +1,6 @@
+/*
+    Description: Selecting, inserting, updating and deleting data from tables
+*/
 -- QUERY 1
 SELECT
     id,
