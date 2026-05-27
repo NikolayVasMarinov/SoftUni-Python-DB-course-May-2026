@@ -125,14 +125,42 @@ AS SELECT
 FROM employees;
 
 --QUERY 16
+UPDATE projects
+SET end_date = start_date + INTERVAL '5 months'
+WHERE end_date IS NULL;
 
 --QUERY 17
+UPDATE
+    employees
+SET
+    salary = salary + 1500,
+    job_title = CONCAT('Senior ', job_title)
+WHERE
+    hire_date BETWEEN 'January 1, 1998' AND 'January 5, 2000';
 
 --QUERY 18
+DELETE FROM addresses
+WHERE city_id IN (5, 17, 20, 30);
 
 --QUERY 19
+CREATE VIEW view_company_chart
+AS SELECT
+       full_name,
+       job_title
+FROM company_chart
+WHERE manager_id = 184;
 
 --QUERY 20
+CREATE VIEW view_addresses
+AS SELECT
+       CONCAT(e.first_name, ' ', e.last_name) AS "full_name",
+       e.department_id,
+       CONCAT(number, ' ', street) AS "address"
+FROM
+    employees as e,
+    addresses as a
+WHERE e.address_id = a.id
+ORDER BY address;
 
 --QUERY 21
 
