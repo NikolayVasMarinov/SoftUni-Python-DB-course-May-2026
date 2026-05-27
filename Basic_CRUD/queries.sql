@@ -40,3 +40,19 @@ WHERE job_title = 'Manager';
 
 SELECT * from employees
 WHERE job_title = 'Manager';
+
+--QUERY 6
+DELETE FROM employees
+WHERE department_id BETWEEN 1 AND 2;
+
+SELECT * FROM employees;
+
+--QUERY 7
+CREATE VIEW top_paid_employee
+AS
+SELECT *
+FROM employees
+ORDER BY salary DESC
+LIMIT 1;
+
+SELECT * FROM top_paid_employee;
