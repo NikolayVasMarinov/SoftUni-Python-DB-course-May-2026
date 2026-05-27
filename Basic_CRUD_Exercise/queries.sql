@@ -1,5 +1,6 @@
 /*
-    Description: Selecting, inserting, updating and deleting data from tables
+    Description: Selecting (with conditions), inserting,
+    updating and deleting data from tables, creating single and multitable views
 */
 -- QUERY 1
 SELECT * FROM cities;
@@ -163,12 +164,27 @@ WHERE e.address_id = a.id
 ORDER BY address;
 
 --QUERY 21
+ALTER VIEW view_addresses
+RENAME TO view_employee_addresses_info;
 
 --QUERY 22
+DROP VIEW view_company_chart
 
 --QUERY 23
+UPDATE projects
+SET name = UPPER(name);
 
 --QUERY 24
+CREATE VIEW view_initials
+AS SELECT
+       SUBSTRING(first_name FROM 1 FOR 2) as "initial",
+       last_name
+FROM employees
+ORDER BY last_name;
 
 --QUERY 25
-
+SELECT
+    name,
+    start_date
+FROM projects
+WHERE name LIKE 'MOUNT%';
