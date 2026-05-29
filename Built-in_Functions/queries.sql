@@ -34,6 +34,13 @@ SELECT
 FROM authors;
 
 --QUERY 6
-
+SELECT
+    last_name AS "Last Name",
+    TO_CHAR(born, 'DD (Dy) Mon YYYY') AS "Date of Birth"
+FROM authors;
 
 --QUERY 7
+SELECT
+    title
+FROM books
+WHERE title LIKE 'Harry Potter%';
