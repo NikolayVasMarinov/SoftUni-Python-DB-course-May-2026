@@ -1,5 +1,5 @@
 /*
-    Description: Selecting, inserting, updating and deleting data from tables
+    Description: Using Built-in SQL functions to process data
 */
 -- QUERY 1
 SELECT
