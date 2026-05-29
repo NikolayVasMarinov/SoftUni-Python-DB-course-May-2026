@@ -15,13 +15,23 @@ WHERE title LIKE 'The%'
 RETURNING title;
 
 -- QUERY 3
-
+SELECT
+    id,
+    side * height / 2 AS area
+FROM triangles;
 
 -- QUERY 4
-
+SELECT
+    title,
+    TRUNC(cost, 3) AS modified_price
+FROM books;
 
 --QUERY 5
-
+SELECT
+    first_name,
+    last_name,
+    EXTRACT(YEAR FROM born) as year
+FROM authors;
 
 --QUERY 6
 
