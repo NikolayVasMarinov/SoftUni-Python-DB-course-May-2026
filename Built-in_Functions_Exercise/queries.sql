@@ -45,16 +45,28 @@ SELECT
 FROM mountains;
 
 --QUERY 7
-
+SELECT
+    capital,
+    TRANSLATE(capital, 'áãåçéíñóú', 'aaaceinou') AS translated_name
+FROM countries;
 
 --QUERY 8
-
+SELECT
+    continent_name,
+    TRIM(LEADING FROM continent_name) AS trim
+FROM continents;
 
 --QUERY 9
-
+SELECT
+    continent_name,
+    TRIM(TRAILING FROM continent_name) AS trim
+FROM continents;
 
 --QUERY 10
-
+SELECT
+    LTRIM('M' FROM peak_name) AS left_trim,
+    RTRIM('m' FROM peak_name) AS right_trim
+FROM peaks;
 
 --QUERY 11
 
