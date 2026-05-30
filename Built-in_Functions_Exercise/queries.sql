@@ -1,5 +1,7 @@
 /*
-
+    Description: Queries utilizing built-in functions
+    for strings, math operations, regex and timestamps
+    (CTEs used)
 */
 -- QUERY 1
 CREATE VIEW view_river_info
@@ -145,21 +147,56 @@ SELECT
 FROM apartments;
 
 --QUERY 21
+ALTER TABLE bookings
+ADD COLUMN billing_day TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP;
 
+SELECT
+    TO_CHAR(billing_day, 'DD "Day" MM "Month" YYYY "Year" HH24:MI:SS') AS "Billing Day"
+FROM bookings;
 
 --QUERY 22
-
+WITH unified_timestamp AS (
+    SELECT booked_at AT TIME ZONE 'UTC' AS tc
+    FROM bookings
+)
+SELECT
+    EXTRACT(YEAR FROM tc) AS "YEAR",
+    EXTRACT(MONTH FROM tc) AS "MONTH",
+    EXTRACT(DAY FROM tc) AS "DAY",
+    EXTRACT(HOUR FROM tc) AS "HOUR",
+    EXTRACT(MINUTE FROM tc) AS "MINUTE",
+    ROUND(EXTRACT(SECOND FROM tc), 0) AS "SECOND"
+FROM unified_timestamp;
 
 --QUERY 23
-
+SELECT
+    user_id,
+    AGE(starts_at, booked_at) AS early_birds
+FROM bookings
+WHERE AGE(starts_at, booked_at) >= '10 months';
 
 --QUERY 24
-
+SELECT
+    companion_full_name,
+    email
+FROM users
+WHERE companion_full_name ILIKE '%aNd%' AND email NOT LIKE '%@gmail';
 
 --QUERY 25
-
+SELECT
+    LEFT(first_name, 2) AS initials,
+    COUNT(*) AS users_count
+FROM users
+GROUP BY initials
+ORDER BY users_count DESC, initials;
 
 --QUERY 26
-
+SELECT
+    SUM(booked_for) AS total_value
+FROM bookings
+WHERE apartment_id = 90;
 
 --QUERY 27
+SELECT
+    AVG(multiplication) AS average_value
+FROM bookings_calculation;
