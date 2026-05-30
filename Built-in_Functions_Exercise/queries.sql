@@ -92,7 +92,7 @@ FROM countries;
 SELECT
     peak_name,
     LEFT(peak_name, 4) AS positive_left,
-    LEFT(peak_name, GREATEST(LENGTH(peak_name) - 4, 0)) AS negative_left
+    LEFT(peak_name, -4) AS negative_left
 FROM peaks;
 
 --QUERY 14
