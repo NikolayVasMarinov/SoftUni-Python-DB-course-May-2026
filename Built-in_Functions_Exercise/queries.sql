@@ -69,19 +69,41 @@ SELECT
 FROM peaks;
 
 --QUERY 11
-
+WITH mountain_info AS (
+    SELECT CONCAT(m.mountain_range, ' ', p.peak_name) AS mountain_information
+    FROM mountains AS m
+    JOIN peaks AS p ON m.id = p.mountain_id
+)
+SELECT
+    mountain_information,
+    LENGTH(mountain_information) AS characters_length,
+    BIT_LENGTH(mountain_information) AS bits_of_a_tring
+FROM mountain_info;
 
 --QUERY 12
-
+SELECT
+    population,
+    LENGTH(CAST(population AS VARCHAR))
+FROM countries;
 
 --QUERY 13
-
+SELECT
+    peak_name,
+    LEFT(peak_name, 4) AS positive_left,
+    LEFT(peak_name, GREATEST(LENGTH(peak_name) - 4, 0)) AS negative_left
+FROM peaks;
 
 --QUERY 14
-
+SELECT
+    peak_name,
+    RIGHT(peak_name, 4) AS positive_right,
+    RIGHT(peak_name, GREATEST(LENGTH(peak_name) - 4, 0)) AS negative_right
+FROM peaks;
 
 --QUERY 15
-
+UPDATE countries
+SET iso_code = UPPER(LEFT(country_name, 3))
+WHERE iso_code IS NULL;
 
 --QUERY 16
 
