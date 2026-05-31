@@ -139,10 +139,28 @@ GROUP BY job_title
 ORDER BY category, job_title;
 
 --QUERY 16
-
+SELECT
+    project_name,
+    CASE
+        WHEN start_date IS NULL AND end_date IS NULL THEN 'Ready for development'
+        WHEN end_date IS NULL THEN 'In Progress'
+        ELSE 'Done'
+    END AS project_status
+FROM projects
+WHERE project_name LIKE '%Mountain%';
 
 --QUERY 17
-
+SELECT
+    department_id,
+    COUNT(id) AS num_employees,
+    CASE
+        WHEN AVG(salary)  > 50000 THEN 'Above average'
+        ELSE 'Below average'
+    END AS salary_level
+FROM employees
+GROUP BY department_id
+HAVING AVG(salary) > 30000
+ORDER BY department_id;
 
 --QUERY 18
 
