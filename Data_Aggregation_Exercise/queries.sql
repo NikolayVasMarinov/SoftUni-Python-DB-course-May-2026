@@ -1,5 +1,6 @@
 /*
-    Description:
+    Description: Data aggregation functions, GROUP BY and HAVING clause,
+    CASE clause, foreign keys, joining tables
 */
 --QUERY 1
 SELECT
