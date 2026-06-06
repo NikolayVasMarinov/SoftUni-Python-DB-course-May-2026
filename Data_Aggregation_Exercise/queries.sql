@@ -163,10 +163,40 @@ HAVING AVG(salary) > 30000
 ORDER BY department_id;
 
 --QUERY 18
-
+CREATE VIEW view_performance_rating
+AS
+SELECT
+    first_name,
+    last_name,
+    job_title,
+    salary,
+    department_id,
+    CASE
+        WHEN salary >= 25000 THEN
+            CASE
+                WHEN job_title LIKE 'Senior%' THEN 'High-performing Senior'
+                ELSE 'High-performing Employee'
+            END
+        ELSE 'Average-performing'
+    END AS performance_rating
+FROM employees;
 
 --QUERY 19
+CREATE TABLE employees_projects(
+    id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    employee_id INT,
+    project_id INT,
 
+    CONSTRAINT e_id
+        FOREIGN KEY(employee_id)
+        REFERENCES employees(id),
+    CONSTRAINT p_id
+        FOREIGN KEY(project_id)
+        REFERENCES projects(id)
+);
 
 --QUERY 20
-
+SELECT
+    *
+FROM departments AS d
+JOIN employees AS e ON d.id = e.department_id;
