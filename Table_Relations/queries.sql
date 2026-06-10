@@ -1,5 +1,6 @@
 /*
-    Description:
+    Description: Table relations, auto incrementation on primary keys,
+    JOIN clause, E/R diagrams
 */
 -- QUERY 1
 CREATE TABLE mountains (
