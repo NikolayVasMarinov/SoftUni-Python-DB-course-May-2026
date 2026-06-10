@@ -120,26 +120,25 @@ CREATE DATABASE study_session_db;
 
 CREATE TABLE students (
     id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    student_name VARCHAR(20)
+    student_name VARCHAR(50)
 );
 
 CREATE TABLE exams (
     id INT GENERATED ALWAYS AS IDENTITY (START WITH 101 INCREMENT BY 1) PRIMARY KEY,
-    exam_name VARCHAR(30)
+    exam_name VARCHAR(50)
 );
 
 CREATE TABLE study_halls (
     id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    study_hall_name VARCHAR(30),
+    study_hall_name VARCHAR(50),
     exam_id INT REFERENCES exams(id)
 );
 
 CREATE TABLE students_exams (
     student_id INT REFERENCES students(id),
     exam_id INT REFERENCES exams(id),
-
     CONSTRAINT pk_students_exams
-        PRIMARY KEY (student_id, exam_id)
+    PRIMARY KEY (student_id, exam_id)
 );
 
 INSERT INTO students(student_name)
@@ -166,19 +165,73 @@ INSERT INTO students_exams(student_id, exam_id)
 VALUES
     (1, 101),
     (1, 102),
-    (2, 101);
-
---QUERY 9
-
+    (2, 101),
+    (3, 103),
+    (2, 102),
+    (2, 103);
 
 --QUERY 10
+CREATE DATABASE online_store_db;
 
+CREATE TABLE item_types (
+    id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    item_type_name VARCHAR(50)
+);
+
+CREATE TABLE cities (
+    id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    city_name VARCHAR(50)
+);
+
+CREATE TABLE items (
+    id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    item_name VARCHAR(50),
+    item_type_id INT REFERENCES item_types(id)
+);
+
+CREATE TABLE customers (
+    id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    customer_name VARCHAR(50),
+    birthday DATE,
+    city_id INT REFERENCES cities(id)
+);
+
+CREATE TABLE orders (
+    id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    customer_id INT REFERENCES customers(id)
+);
+
+CREATE TABLE order_items (
+    order_id INT REFERENCES orders(id),
+    item_id INT REFERENCES items(id),
+    PRIMARY KEY (order_id, item_id)
+);
 
 --QUERY 11
+ALTER TABLE countries
+ADD CONSTRAINT countries_continents_fk
+    FOREIGN KEY (continent_code)
+        REFERENCES continents(continent_code)
+        ON DELETE CASCADE;
 
+ALTER TABLE countries
+ADD CONSTRAINT countries_currencies_fk
+    FOREIGN KEY (currency_code)
+        REFERENCES currencies(currency_code)
+        ON DELETE CASCADE;
 
 --QUERY 12
+ALTER TABLE countries_rivers
+ADD CONSTRAINT countries_fk
+    FOREIGN KEY (country_code)
+        REFERENCES countries(country_code)
+        ON UPDATE CASCADE;
 
+ALTER TABLE countries_rivers
+ADD CONSTRAINT rivers_fk
+    FOREIGN KEY (river_id)
+        REFERENCES rivers(id)
+        ON UPDATE CASCADE;
 
 --QUERY 13
 
