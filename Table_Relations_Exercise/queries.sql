@@ -234,9 +234,48 @@ ADD CONSTRAINT rivers_fk
         ON UPDATE CASCADE;
 
 --QUERY 13
+CREATE TABLE customers (
+    id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    customer_name VARCHAR(30)
+);
 
+CREATE TABLE contacts (
+    id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    contact_name VARCHAR(40),
+    phone VARCHAR(15),
+    email VARCHAR(30),
+    customer_id INT REFERENCES customers(id) ON DELETE SET NULL ON UPDATE CASCADE
+);
+
+INSERT INTO customers(customer_name)
+VALUES
+    ('BlueBird Inc'),
+    ('Dolphin LLC');
+
+INSERT INTO contacts(contact_name, phone, email, customer_id)
+VALUES
+    ('John Doe', '(408)-111-1234', 'john.doe@bluebird.dev', 1),
+    ('Jane Doe', '(408)-111-1235', 'jane.doe@bluebird.dev', 1),
+    ('David Wright', '(408)-222-1234', 'david.wright@dolphin.dev', 2);
+
+DELETE FROM customers
+WHERE id = 1;
 
 --QUERY 14
-
+SELECT
+    m.mountain_range,
+    p.peak_name,
+    p.elevation
+FROM
+    mountains AS m
+    JOIN peaks AS p ON p.mountain_id = m.id
+WHERE m.mountain_range LIKE '%Rila%'
+ORDER BY p.elevation DESC;
 
 --QUERY 15
+SELECT
+    COUNT(*) AS countries_without_rivers
+FROM
+    countries AS c
+    LEFT JOIN countries_rivers AS cr ON c.country_code = cr.country_code
+WHERE cr.river_id IS NULL;
