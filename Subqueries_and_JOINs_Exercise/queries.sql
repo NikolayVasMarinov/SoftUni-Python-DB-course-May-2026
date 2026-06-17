@@ -100,19 +100,58 @@ GROUP BY a.country
 ORDER BY booking_count DESC, a.country;
 
 --QUERY 11
-
+SELECT
+    mc.country_code,
+    m.mountain_range,
+    p.peak_name,
+    p.elevation
+FROM mountains AS m
+JOIN peaks AS p ON p.mountain_id = m.id
+JOIN mountains_countries AS mc ON mc.mountain_id = m.id
+WHERE p.elevation > 2835 AND mc.country_code LIKE 'BG'
+ORDER BY p.elevation DESC;
 
 --QUERY 12
-
+SELECT
+    mc.country_code,
+    COUNT(m.mountain_range) AS mountain_range_count
+FROM mountains AS m
+JOIN mountains_countries AS mc ON mc.mountain_id = m.id
+WHERE mc.country_code IN ('US', 'RU', 'BG')
+GROUP BY mc.country_code
+ORDER BY mountain_range_count DESC;
 
 --QUERY 13
-
+SELECT
+    c.country_name,
+    r.river_name
+FROM countries_rivers AS cr
+JOIN rivers AS r ON r.id = cr.river_id
+RIGHT JOIN countries AS c USING (country_code)
+WHERE c.continent_code LIKE 'AF'
+ORDER BY c.country_name
+LIMIT 5;
 
 --QUERY 14
-
+SELECT
+    MIN(average_continent_area) AS min_average_area
+FROM (
+        SELECT
+            AVG(area_in_sq_km) AS average_continent_area
+        FROM countries
+        GROUP BY continent_code
+     ) AS min_average;
 
 --QUERY 15
-
+SELECT
+    COUNT(*) AS countries_without_mountains
+FROM countries
+WHERE country_code NOT IN (
+    SELECT
+        country_code
+    FROM
+        mountains_countries
+    );
 
 --QUERY 18
 
