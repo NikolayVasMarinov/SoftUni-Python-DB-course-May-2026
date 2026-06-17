@@ -1,5 +1,5 @@
 /*
-    Description:
+    Description: JOIN clause, Subqueries, Ranking functions and CTEs
 */
 --QUERY 1
 SELECT
